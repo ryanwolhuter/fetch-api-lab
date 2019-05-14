@@ -28,7 +28,20 @@ function logError(error) {
 // Fetch JSON ----------
 
 function fetchJSON() {
-  // TODO
+  fetch('examples/animals.json')
+    .then(validateResponse)
+    .then(readResponseAsJSON)
+    .then(logResult)
+    .catch(logError);
+}
+function validateResponse(response) {
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return response;
+}
+function readResponseAsJSON(response) {
+  return response.json();
 }
 const jsonButton = document.getElementById('json-btn');
 jsonButton.addEventListener('click', fetchJSON);
