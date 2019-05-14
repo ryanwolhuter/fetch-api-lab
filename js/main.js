@@ -93,8 +93,15 @@ textButton.addEventListener('click', fetchText);
 // HEAD request ----------
 
 function headRequest() {
-  // TODO
+  fetch('examples/words.txt', {
+    method: 'HEAD'
+  })
+    .then(validateResponse)
+    .then(response => response.headers.get('Content-Length'))
+    .then(logResult)
+    .catch(logError);
 }
+
 const headButton = document.getElementById('head-btn');
 headButton.addEventListener('click', headRequest);
 
