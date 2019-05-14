@@ -111,10 +111,12 @@ headButton.addEventListener('click', headRequest);
 /* NOTE: Never send unencrypted user credentials in production! */
 function postRequest() {
   const formData = new FormData(document.getElementById('msg-form'));
-
+  const messageHeaders = new Headers({ 'Content-Type': 'application/json', 'X-CUSTOM': 'Howzit' });
+  
   fetch('http://localhost:5000/', {
     method: 'POST',
-    body: formData
+    headers: messageHeaders,
+    body: JSON.stringify({ lab: 'fetch', status: 'fun' })
   })
     .then(validateResponse)
     .then(readResponseAsText)
